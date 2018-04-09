@@ -14,11 +14,12 @@ gem 'jc-validates_timeliness'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'pg', '< 1.0'
-gem 'rails', '5.0.6'
+gem 'rails', '5.0.7'
 gem 'responders', '~> 2.0'
 gem 'sass-rails'
 gem 'thin'
 gem 'uglifier', '>= 1.3.0'
+gem 'redcarpet'
 gem 'unf' # <- fog <- asset_sync (http://bit.ly/17TiMjA)
 
 # Groups: Rails will load the group where name == Rails.env
