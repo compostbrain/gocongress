@@ -335,12 +335,8 @@ DEPENDENCIES
   launchy
   meta_request
   pg (< 1.0)
-<<<<<<< HEAD
   pry-rails
-  rails (= 5.0.6)
-=======
   rails (= 5.0.7)
->>>>>>> 38173ece4099b486d7b8009357afc9f3c0b59708
   rails-controller-testing
   rails_12factor
   rb-fsevent
