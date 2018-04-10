@@ -1,12 +1,16 @@
-= form_for @content do |f|
-  = render :partial => "shared/error_messages", :locals => { :resource => @content }
+= form_for [@content_category, @content] do |f|
+  - if @content.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@content.errors.count, "error")
+        prohibited this product from being saved:
+      %ul
+        - @content.errors.full_messages.each do |message|
+          %li= message
 
   .field
     = f.label :subject
     = f.text_field :subject
-  .field
-    = f.label :content_category_id
-    = f.select :content_category_id, content_category_options
   .field
     = render partial: "shared/md_area", locals: { :obj => :content, :atr => :body, :rows => 20 }
   .field
@@ -15,7 +19,6 @@
   .field
     = f.label :show_on_homepage
     = f.check_box :show_on_homepage
-
   .field
-    %label
-    = f.submit 'Save'
+    = f.label :submit
+    = f.submit "Submit"

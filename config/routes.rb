@@ -34,9 +34,12 @@ Gocongress::Application.routes.draw do
           :controllers => { :registrations => "sign_ups" },
           :path => 'sign_ups'
 
-        resources :activities, :contacts, :content_categories,
-          :contents, :activity_categories, :tournaments,
+        resources :activities, :contacts,
+          :activity_categories, :tournaments,
           :transactions
+        resources :content_categories do
+          resources :contents, shallow: true
+        end
         resources :plans, :except => [:index]
         resources :plan_categories do
           put 'update_order', :on => :collection

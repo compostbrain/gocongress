@@ -5,12 +5,7 @@ module NameInflector
   MANDPREF = ["o'"]
 
   # Suffixes with mandatory capitalization
-<<<<<<< HEAD
-  MANDSUF = ["jr.", "sr.", "esq."]
-=======
   MANDSUF = ["jr.", "sr."]
->>>>>>> 38173ece4099b486d7b8009357afc9f3c0b59708
-
   # Prefixes with optional succeeding capitals, eg.
   # Macintyre and MacIntyre are both valid
   OPTPREF = ["mac", "mc"]
@@ -30,18 +25,6 @@ module NameInflector
     mandsuf_match = longest_matching_suffix MANDSUF, name
     optpref_match = longest_matching_prefix OPTPREF, name
 
-<<<<<<< HEAD
-    if mandpref_match.present?
-      postprefix = remove_prefix name, mandpref_match
-      name_fix = mandpref_match.capitalize + postprefix.capitalize
-
-    elsif optpref_match.present?
-      postprefix = remove_prefix name, optpref_match
-      is_first_char_uppercase?(postprefix) ? name_fix = name : name_fix = name.capitalize
-
-    else
-      name_fix = name.capitalize
-=======
     if mandpref_match.present? || mandsuf_match.present? || optpref_match.present?
 
       if mandpref_match.present?
@@ -64,10 +47,7 @@ module NameInflector
 
     else
       return name.capitalize
->>>>>>> 38173ece4099b486d7b8009357afc9f3c0b59708
     end
-    capitalize_suffix(name_fix, mandsuf_match) if mandsuf_match.present?
-    return name_fix
   end
 
   def self.capitalize_suffix(name, suffix)

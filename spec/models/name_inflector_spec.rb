@@ -28,24 +28,13 @@ RSpec.describe NameInflector, :type => :model do
       expect(subject.capitalize("o'brian")).to eq("O'Brian")
     end
 
-<<<<<<< HEAD
-    it 'properly capitalizes suffixes Sr. and Jr.' do
-      expect(subject.capitalize("o'brian sr.")).to eq("O'Brian Sr.")
-      expect(subject.capitalize("o'brian jr.")).to eq("O'Brian Jr.")
-      expect(subject.capitalize("o'brian esq.")).to eq("O'Brian Esq.")
-      expect(subject.capitalize("harnett-hARgRoVE jr.")).to eq("Harnett-Hargrove Jr.")
-=======
     it "capitalizes important suffixes" do
->>>>>>> 38173ece4099b486d7b8009357afc9f3c0b59708
       expect(subject.capitalize("eagle, jr.")).to eq("Eagle, Jr.")
       expect(subject.capitalize("EAGLE, JR.")).to eq("Eagle, Jr.")
       expect(subject.capitalize("eagle, sr.")).to eq("Eagle, Sr.")
       expect(subject.capitalize("eagle, Sr.")).to eq("Eagle, Sr.")
     end
-<<<<<<< HEAD
-=======
-
->>>>>>> 38173ece4099b486d7b8009357afc9f3c0b59708
+    
     # In the future, we could implement proper capitalization of
     # other, less common international names.
     #
