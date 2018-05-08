@@ -2,7 +2,11 @@ require "invoice_item"
 
 class Attendee < ApplicationRecord
   include YearlyModel
+<<<<<<< HEAD
   PHONE_REGEX = /\A[0-9]*/
+=======
+  PHONE_REGEX = /(?:\+?|\b)[0-9]{10}\b/
+>>>>>>> Add local phone format validation
   # Associations
   # ------------
 

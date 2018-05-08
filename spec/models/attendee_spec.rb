@@ -113,13 +113,13 @@ RSpec.describe Attendee, :type => :model do
       expect(a).to be_valid
     end
 
-    it 'Attendee required to have a local phone if receive_sms_true' do
+    it 'Attendee reqeuted to have a local phone if receive_sms_true' do
       a.receive_sms = true
       a.local_phone = nil
       expect(a).to have_error_about :local_phone
     end
 
-    it 'Attendee local_phone only contains integers if receive_sms_true' do
+    it 'requires local_phone to only contain integers if receive_sms_true' do
       a.receive_sms = true
       a.local_phone = "mygreatstring"
       expect(a).to have_error_about :local_phone
