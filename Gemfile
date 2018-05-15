@@ -13,7 +13,7 @@ gem 'haml'
 gem 'jc-validates_timeliness'
 gem 'jquery-rails'
 gem 'kaminari'
-gem 'nokogiri' 
+gem 'nokogiri'
 gem 'pg', '< 1.0'
 gem 'rails', '5.0.7'
 gem 'responders', '~> 2.0'
@@ -61,6 +61,7 @@ end
 group :test do
   gem 'capybara'
   gem 'deep_merge' # recursively merge hashes
+  gem 'database_cleaner'
   gem 'factory_bot'
   gem 'factory_bot_rails'
   gem 'launchy' # provides `save_and_open_page`
