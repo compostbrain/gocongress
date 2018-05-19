@@ -50,6 +50,8 @@ group :test, :development do
 end
 
 group :development do
+  gem 'guard'
+  gem 'guard-rspec'
   gem 'haml-rails'
   gem 'meta_request'
   gem 'spring'
