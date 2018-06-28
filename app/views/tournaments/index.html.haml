@@ -33,4 +33,9 @@
           %td= t.eligible
           - if current_user_is_admin?
             %td= link_to 'Edit', edit_tournament_path(t)
+            %td
+              = form_for @import, url: import_tournament_path(id: t.id, year: t.year), multipart: true do |f|
+                .field
+                  = f.file_field :file
+                  = f.submit "Import Tournament Data"
             %td= link_to_destroy(t)

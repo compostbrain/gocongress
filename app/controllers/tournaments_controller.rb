@@ -10,6 +10,7 @@ class TournamentsController < ApplicationController
   # Actions
   def index
     @tournaments = @tournaments.yr(@year).order('lower(name)')
+    @import = Tournament::Import.new
   end
 
   def create
@@ -20,6 +21,21 @@ class TournamentsController < ApplicationController
       render :action => "new"
     end
   end
+
+  def edit
+    @import = Tournament::Import.new
+  end
+
+  def import
+    @import = Tournament::Import.new tournament_import_params
+    if @import.save
+      redirect_to tournament_path(@tournament), notice: "Imported Tournament Data"
+    else
+      render action: :edit, notice: "There were errors with the XML file"
+    end
+  end
+  
+  
 
   def update
     if @tournament.update_attributes!(tournament_params)
@@ -36,6 +52,10 @@ class TournamentsController < ApplicationController
 
   private
 
+  def tournament_import_params
+    params.require(:tournament_import).permit(:file, :id, :year)
+  end
+  
   def tournament_params
     params.require(:tournament).permit(:description, :directors, :eligible,
       :location, :name, :openness, :show_in_nav_menu)

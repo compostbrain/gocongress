@@ -41,6 +41,9 @@ Gocongress::Application.routes.draw do
         resources :plan_categories do
           put 'update_order', :on => :collection
         end
+        resources :tournaments do
+          member { post :import }
+        end
         resources :shirts, :except => :show
 
         # Creating and updating attendees involves a few different

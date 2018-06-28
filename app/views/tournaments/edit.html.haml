@@ -1,5 +1,10 @@
 %h2 Editing tournament
-
+= form_for [@tournament, @import], url: import_tournament_path, multipart: true do |f|
+  %fieldset
+    %h2 Import Tournament Data
+    .field
+      = f.file_field :file
+      = f.submit "Import Tournament Data"
 = render 'form'
 
 = link_to 'Details', tournament_path(@tournament)
