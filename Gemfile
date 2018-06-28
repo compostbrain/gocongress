@@ -63,6 +63,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'deep_merge' # recursively merge hashes
   gem 'factory_bot'
   gem 'factory_bot_rails'

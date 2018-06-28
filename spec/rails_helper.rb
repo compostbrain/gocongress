@@ -6,6 +6,8 @@ end
 require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
+Capybara::Screenshot.autosave_on_failure = false
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
