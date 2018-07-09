@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180524165637) do
+ActiveRecord::Schema.define(version: 20180709153650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "activities", force: :cascade do |t|
+  create_table "activities", id: :integer, default: -> { "nextval('events_id_seq'::regclass)" }, force: :cascade do |t|
     t.string   "name",                 limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -35,14 +35,14 @@ ActiveRecord::Schema.define(version: 20180524165637) do
     t.index ["year", "leave_time"], name: "index_activities_on_year_and_start", using: :btree
   end
 
-  create_table "activity_categories", force: :cascade do |t|
+  create_table "activity_categories", id: :integer, default: -> { "nextval('event_categories_id_seq'::regclass)" }, force: :cascade do |t|
     t.string  "name",        limit: 25,  null: false
     t.integer "year",                    null: false
     t.string  "description", limit: 500
     t.index ["id", "year"], name: "uniq_activity_categories_on_id_and_year", unique: true, using: :btree
   end
 
-  create_table "attendee_activities", force: :cascade do |t|
+  create_table "attendee_activities", id: :integer, default: -> { "nextval('attendee_events_id_seq'::regclass)" }, force: :cascade do |t|
     t.integer  "attendee_id", null: false
     t.integer  "activity_id", null: false
     t.datetime "created_at"
@@ -146,6 +146,28 @@ ActiveRecord::Schema.define(version: 20180524165637) do
     t.index ["id", "year"], name: "index_events_on_id_and_year", unique: true, using: :btree
   end
 
+  create_table "game_appointments", force: :cascade do |t|
+    t.string   "location"
+    t.datetime "time"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "time_zone"
+    t.integer  "year"
+    t.integer  "attendee_one_id"
+    t.integer  "attendee_two_id"
+    t.integer  "round_id"
+    t.string   "table",           null: false
+    t.index ["attendee_one_id"], name: "index_game_appointments_on_attendee_one_id", using: :btree
+    t.index ["attendee_two_id"], name: "index_game_appointments_on_attendee_two_id", using: :btree
+    t.index ["round_id"], name: "index_game_appointments_on_round_id", using: :btree
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.string   "jobname"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "plan_categories", force: :cascade do |t|
     t.string   "name",                 limit: 255,                 null: false
     t.datetime "created_at"
@@ -183,6 +205,29 @@ ActiveRecord::Schema.define(version: 20180524165637) do
     t.index ["plan_category_id"], name: "index_plans_on_plan_category_id", using: :btree
   end
 
+  create_table "players", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "name"
+    t.string   "aga_id"
+    t.string   "club"
+    t.string   "country"
+    t.string   "rank"
+    t.string   "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rounds", force: :cascade do |t|
+    t.integer  "tournament_id"
+    t.integer  "number"
+    t.datetime "start_time",           null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "year"
+    t.text     "notification_message"
+    t.index ["tournament_id"], name: "index_rounds_on_tournament_id", using: :btree
+  end
+
   create_table "shirts", force: :cascade do |t|
     t.integer  "year",                                    null: false
     t.string   "name",        limit: 40,                  null: false
@@ -195,6 +240,14 @@ ActiveRecord::Schema.define(version: 20180524165637) do
     t.index ["hex_triplet", "year"], name: "index_shirts_on_hex_triplet_and_year", unique: true, using: :btree
     t.index ["id", "year"], name: "index_shirts_on_id_and_year", unique: true, using: :btree
     t.index ["name", "year"], name: "index_shirts_on_name_and_year", unique: true, using: :btree
+  end
+
+  create_table "sms_notifications", force: :cascade do |t|
+    t.string   "to"
+    t.string   "from"
+    t.text     "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tournaments", force: :cascade do |t|
@@ -283,6 +336,7 @@ ActiveRecord::Schema.define(version: 20180524165637) do
   add_foreign_key "attendees", "users", name: "fk_attendees_user_id_year", on_update: :cascade, on_delete: :cascade
   add_foreign_key "contacts", "years", column: "year", primary_key: "year", name: "fk_contacts_year", on_update: :cascade, on_delete: :cascade
   add_foreign_key "contents", "content_categories", name: "fk_contents_content_category_id_year", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "game_appointments", "rounds"
   add_foreign_key "plan_categories", "events", name: "fk_plan_categories_event_id_year", on_update: :cascade, on_delete: :cascade
   add_foreign_key "plans", "plan_categories", name: "fk_plans_plan_category_id_year", on_update: :cascade, on_delete: :cascade
   add_foreign_key "transactions", "users", column: "updated_by_user_id", name: "fk_transactions_updated_by_user_id_year", on_update: :cascade, on_delete: :nullify
