@@ -16,5 +16,5 @@ RSpec.describe "gotha tournament import", type: :feature do
     click_button "Import Tournament Data"
     expect(page). to have_content 'Tournament Data Imported'
   end
-  
+
 end
