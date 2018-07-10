@@ -67,6 +67,7 @@ group :test do
   gem 'deep_merge' # recursively merge hashes
   gem 'factory_bot'
   gem 'factory_bot_rails'
+  gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
   gem 'launchy' # provides `save_and_open_page`
   gem 'rails-controller-testing'
   gem 'rb-fsevent'

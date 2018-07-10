@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/stympy/faker.git
+  revision: 00be118fc07fe19309b87d1863c12941ad161651
+  branch: master
+  specs:
+    faker (1.8.7)
+      i18n (>= 0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -369,6 +377,7 @@ DEPENDENCIES
   exception_notification
   factory_bot
   factory_bot_rails
+  faker!
   ffi (= 1.9.18)
   fog-aws
   guard

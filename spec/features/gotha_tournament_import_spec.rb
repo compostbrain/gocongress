@@ -5,7 +5,7 @@ RSpec.describe "gotha tournament import", type: :feature do
   let(:admin) { create :admin, :password => password }
   let!(:tournament) { create :tournament, name: "US Open"}
 
-  fit "imports tournament data from xml file" do
+  it "imports tournament data from xml file" do
     visit new_user_session_path(year: admin.year)
     fill_in 'Email', with: admin.email
     fill_in 'Password', with: password
@@ -14,7 +14,7 @@ RSpec.describe "gotha tournament import", type: :feature do
     click_link 'Import Data'
     attach_file("tournament_import[file]", Rails.root + "spec/fixtures/files/usopen_players_2018.xml")
     click_button "Import Tournament Data"
-    expect(page). to have_content 'Tournament Data Imported'
+    expect(page).to have_content 'Tournament Data Imported'
   end
 
 end
