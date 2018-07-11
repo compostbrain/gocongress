@@ -37,9 +37,31 @@ class GameAppointment < ApplicationRecord
     game_appointment.year = round.year
 
     tournament = Tournament.find(round.tournament_id)
+<<<<<<< HEAD
     game_appointment.location = tournament.location.empty? ? "location has not been specified" : tournament.location
+=======
+    game_appointment.location = tournament.location
+>>>>>>> ebfb6646e24248b05f5b6432213f70786c2e2eda
 
     game_appointment
   end
 
+<<<<<<< HEAD
+=======
+  # after_create :notification
+
+  # Notify our appointment attendee X minutes before the appointment time
+  def notification
+    @twilio_number = ENV['TWILIO_NUMBER']
+    account_sid = ENV['TWILIO_ACCOUNT_SID']
+    @client = Twilio::REST::Client.new account_sid, ENV['TWILIO_AUTH_TOKEN']
+    time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
+    notification = "Hi #{self.attendee}. You have a game scheduled with the following details: Opponent: #{self.oppoenent}, Time: #{time_str}, Location: #{self.location}."
+    message = @client.api.account(account_sid).messages.create(
+      :from => @twilio_number,
+      :to => self.attendee.phone_number,
+      :body => notification,
+    )
+  end
+>>>>>>> ebfb6646e24248b05f5b6432213f70786c2e2eda
 end
