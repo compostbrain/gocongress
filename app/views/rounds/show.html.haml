@@ -23,12 +23,12 @@
       %th= GameAppointment.human_attribute_name(:location)
   %tbody
     - @round.game_appointments.each do |game_appointment|
-      %tr
+      %tr{id: "game_appointment_#{game_appointment.id}"}
         %td= link_to game_appointment.table, edit_game_appointment_path(game_appointment)
         %td{:class => game_appointment.attendee_one.receive_sms ? "sms_enabled" : "sms_disabled" }
-          = game_appointment.attendee_one.full_name
+          = game_appointment.white_player.full_name
         %td{:class => game_appointment.attendee_two.receive_sms ? "sms_enabled" : "sms_disabled" }
-          = game_appointment.attendee_two.full_name
+          = game_appointment.black_player.full_name
         %td= game_appointment.location
 
 %br
