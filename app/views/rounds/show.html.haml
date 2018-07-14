@@ -20,6 +20,8 @@
       %th= GameAppointment.human_attribute_name(:table)
       %th= GameAppointment.human_attribute_name(:white_player)
       %th= GameAppointment.human_attribute_name(:black_player)
+      %th= GameAppointment.human_attribute_name(:handicap)
+      %th= GameAppointment.human_attribute_name(:result)
       %th= GameAppointment.human_attribute_name(:location)
   %tbody
     - @round.game_appointments.each do |game_appointment|
@@ -29,6 +31,8 @@
           = game_appointment.white_player.full_name
         %td{:class => game_appointment.attendee_two.receive_sms ? "sms_enabled" : "sms_disabled" }
           = game_appointment.black_player.full_name
+        %td= game_appointment.handicap
+        %td= game_appointment.result
         %td= game_appointment.location
 
 %br
