@@ -8,7 +8,6 @@ class RoundsController < ApplicationController
   before_action :find_round , only: [:show, :edit, :update, :destroy]
 
   def index
-    # @tournaments = Tournament.all
     @rounds = Round.order('rounds.number ASC').all
     if @rounds.length.zero?
       flash[:alert] = 'You have no rounds. Create one now to get started.'
